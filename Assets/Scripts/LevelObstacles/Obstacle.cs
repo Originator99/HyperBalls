@@ -21,7 +21,16 @@ public class Obstacle : MonoBehaviour {
         if (isActive && defaultChildCount > 0) {
             if (transform.childCount != defaultChildCount) {
                 isActive = false;
-                Invoke("DelayedDisable", 2f);
+                DestroyEffect();
+                DelayedDisable();
+            }
+        }
+    }
+
+    private void DestroyEffect() {
+        foreach (Transform child in transform) {
+            if (child.tag == "Bad") {
+                EffectsController.instance.BadBlockDestroyEffect(child.position);
             }
         }
     }

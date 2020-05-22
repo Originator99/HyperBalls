@@ -42,6 +42,8 @@ public class PlayerMotor : MonoBehaviour {
         if (collision.gameObject.tag == "ground") {
             isGrounded = true;
         } else if (collision.gameObject.tag == "Good") {
+            EffectsController.instance.CameraShake();
+            EffectsController.instance.GoodBlockDestroyEffect(collision.gameObject.transform.position);
             Destroy(collision.gameObject);
         } else if (collision.gameObject.tag == "Bad") {
             Debug.Log("Game over");

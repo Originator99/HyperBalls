@@ -11,15 +11,15 @@ public class DistanceController : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetMouseButtonDown(0)) {
             transform.position = playerDash.transform.position;
             aim.StartDrawing();
             GameManager.instance.DoSlowMotion();
         }
-        if (Input.GetKey(KeyCode.Space)) {
+        if (Input.GetMouseButton(0)) {
             transform.position += Vector3.right * moveSpeed * Time.unscaledDeltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        if (Input.GetMouseButtonUp(0)) {
             playerDash.StartDash(transform.position);
             aim.StopDrawing();
             GameManager.instance.StopSlowMotion();

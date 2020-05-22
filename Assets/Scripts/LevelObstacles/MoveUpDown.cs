@@ -12,6 +12,6 @@ public class MoveUpDown : MonoBehaviour {
             direction = -1;
         else if (transform.position.y < -5)
             direction = 1;
-        transform.position += new Vector3(0f, direction * moveSpeed * Time.unscaledDeltaTime, 0f);
+        transform.position += new Vector3(0f, direction * moveSpeed * Time.deltaTime, 0f);
     }
 }
