@@ -42,11 +42,12 @@ public class PlayerMotor : MonoBehaviour {
         if (collision.gameObject.tag == "ground") {
             isGrounded = true;
         } else if (collision.gameObject.tag == "Good") {
+            GameEventSystem.RaiseGameEvent(GAME_EVENT.GOOD_DESTROYED);
             EffectsController.instance.CameraShake();
             EffectsController.instance.GoodBlockDestroyEffect(collision.gameObject.transform.position);
             Destroy(collision.gameObject);
         } else if (collision.gameObject.tag == "Bad") {
-            Debug.Log("Game over");
+            GameEventSystem.RaiseGameEvent(GAME_EVENT.BAD_DESTROYED);
         }
     }
 
