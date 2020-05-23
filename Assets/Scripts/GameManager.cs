@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour {
 
     public void DoSlowMotion() {
         stopSlowDown = false;
+        if (Time.timeScale < 1) {
+            Time.timeScale = 1;
+        }
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }

@@ -9,8 +9,6 @@ using EZCameraShake;
 /// </summary>
 public class EffectsController : MonoBehaviour {
     public Camera mainCam;
-    public GameObject goodDestroy;
-    public GameObject badDestroy;
 
     #region Singleton
     public static EffectsController instance;
@@ -22,18 +20,7 @@ public class EffectsController : MonoBehaviour {
     }
     #endregion
 
-    private void Start() {
-    }
-
     public void CameraShake(float power = 0.5f) {
         CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
-    }
-    public void GoodBlockDestroyEffect(Vector2 pos) {
-        GameObject obj = Instantiate(goodDestroy, transform) as GameObject;
-        obj.transform.position = pos;
-    }
-    public void BadBlockDestroyEffect(Vector2 pos) {
-        GameObject obj = Instantiate(badDestroy, transform) as GameObject;
-        obj.transform.position = pos;
     }
 }

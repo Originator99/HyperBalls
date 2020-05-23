@@ -4,50 +4,36 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour {
 
-    private float JumpForceDefault = 4f;
+    private readonly float JumpForceDefault = 4f;
     private bool isGrounded;
     private Rigidbody2D rb;
-
-    private float horizontalExtent, verticleExtent;
 
     private void Start() {
         isGrounded = false;
         rb = GetComponent<Rigidbody2D>();
-        horizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
-        verticleExtent = Camera.main.orthographicSize;
-        Debug.Log("Hor Extent : " + horizontalExtent + " Verticle Extent " + verticleExtent);
+        GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+
     }
 
     private void Update() {
-        HandleMovement();
-    }
-
-    private void FixedUpdate() {
-        if (isGrounded) {
-            DoJump(JumpForceDefault);
+        if (!PlayerHelper.PAUSED) { 
+            HandleMovement();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "ground") {
-            isGrounded = true;
-        } else if (collision.gameObject.tag == "Good") {
-            Destroy(collision.gameObject);
-        } else if (collision.gameObject.tag == "Bad") {
-            Debug.Log("Game over");
+    private void FixedUpdate() {
+        if (isGrounded && !PlayerHelper.PAUSED) {
+            DoJump(JumpForceDefault);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "ground") {
             isGrounded = true;
-        } else if (collision.gameObject.tag == "Good") {
-            GameEventSystem.RaiseGameEvent(GAME_EVENT.GOOD_DESTROYED);
-            EffectsController.instance.CameraShake();
-            EffectsController.instance.GoodBlockDestroyEffect(collision.gameObject.transform.position);
-            Destroy(collision.gameObject);
-        } else if (collision.gameObject.tag == "Bad") {
-            GameEventSystem.RaiseGameEvent(GAME_EVENT.BAD_DESTROYED);
+        }
+        if (collision.gameObject.GetComponent<Obstacle>() != null) {
+            Debug.Log("Hit");
+            collision.gameObject.GetComponent<Obstacle>().OnPlayerHit();
         }
     }
 
