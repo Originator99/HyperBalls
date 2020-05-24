@@ -27,6 +27,14 @@ public class PlayerDash : MonoBehaviour {
         }
     }
 
+    public void DisablePhysics() {
+        rb.bodyType = RigidbodyType2D.Static;
+    }
+
+    public void EnablePhysics() {
+        rb.bodyType = RigidbodyType2D.Dynamic;
+    }
+
     public void StartDash(Vector3 target) {
         rb.gravityScale = 0;
         this.target = target;

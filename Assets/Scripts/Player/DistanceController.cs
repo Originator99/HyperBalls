@@ -7,9 +7,8 @@ public class DistanceController : MonoBehaviour {
     public float moveSpeed = 5f;
     public float maxUnits = 5f;
     public PlayerDash playerDash;
-    private float maxDistance;
     private void Start() {
-        maxDistance = transform.position.x + maxUnits;
+
     }
 
     private void Update() {
@@ -17,15 +16,16 @@ public class DistanceController : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 transform.position = playerDash.transform.position;
                 aim.StartDrawing();
+                playerDash.DisablePhysics();
                 GameManager.instance.DoSlowMotion();
-                maxDistance = transform.position.x + maxUnits;
             }
             if (Input.GetMouseButton(0)) {
-                if (transform.position.x < maxDistance) {
+                if (Vector2.Distance(playerDash.transform.position, transform.position) < maxUnits) {
                     transform.position += Vector3.right * moveSpeed * Time.unscaledDeltaTime;
                 }
             }
             if (Input.GetMouseButtonUp(0)) {
+                playerDash.EnablePhysics();
                 playerDash.StartDash(transform.position);
                 aim.StopDrawing();
                 GameManager.instance.StopSlowMotion();
