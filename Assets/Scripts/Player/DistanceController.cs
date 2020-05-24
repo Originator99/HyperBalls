@@ -30,9 +30,6 @@ public class DistanceController : MonoBehaviour {
                 aim.StopDrawing();
                 GameManager.instance.StopSlowMotion();
             }
-            if (Input.GetKeyDown(KeyCode.PageUp)) {
-                GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
-            }
         }
     }
 }

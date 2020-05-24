@@ -19,6 +19,15 @@ public class PlayerMotor : MonoBehaviour {
         if (!PlayerHelper.PAUSED) { 
             HandleMovement();
         }
+
+
+        if (Input.GetKeyDown(KeyCode.PageUp)) {
+            GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+        }
+
+        if (Input.GetKeyDown(KeyCode.PageDown)) {
+            Loader.Load(SceneName.Dashboard);
+        }
     }
 
     private void FixedUpdate() {
