@@ -16,7 +16,14 @@ public class PlayerDash : MonoBehaviour {
         target = transform.position;
     }
 
-    private void Update() {
+	private void OnDisable() {
+		isMoving = false;
+		if (rb != null) {
+			rb.gravityScale = defaultGravityScale;
+		}
+	}
+
+	private void Update() {
         if (isMoving) {
             if (Vector3.Distance(transform.position, target) > 1f) {
                 transform.position = Vector3.MoveTowards(transform.position, target, DashSpeed * Time.unscaledDeltaTime);
@@ -40,8 +47,4 @@ public class PlayerDash : MonoBehaviour {
         this.target = target;
         isMoving = true;
     }
-}
-
-public class PlayerHelper {
-    public static bool PAUSED = false;
 }

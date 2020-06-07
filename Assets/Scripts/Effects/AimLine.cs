@@ -15,7 +15,7 @@ public class AimLine : MonoBehaviour {
     }
 
     private void Update() {
-        if (isDrawing && !PlayerHelper.PAUSED) {
+        if (isDrawing) {
             Line.SetPosition(0, playerGO.transform.position);
             Line.SetPosition(1, DistanceGO.transform.position);
         }

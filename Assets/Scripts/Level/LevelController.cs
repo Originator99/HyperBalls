@@ -32,8 +32,8 @@ public class LevelController : MonoBehaviour {
         if (type == GAME_EVENT.LEVEL_START) {
             RestartLevel();
         }
-        if (type == GAME_EVENT.LEVEL_END) {
-            Debug.Log("Game over");
+        if (type == GAME_EVENT.LEVEL_END && data!=null && data.GetType() == typeof(bool)) {
+			OnLevelEnd((bool)data);
         }
     }
 
@@ -81,13 +81,23 @@ public class LevelController : MonoBehaviour {
     }
 
     private IEnumerator SwitchPart() {
-        PlayerHelper.PAUSED = true;
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
         yield return new WaitForSeconds(0.5f);
         playerGO.SetActive(false);
         Room.transform.DOMoveX(partsOfLevel[currentPart].RoomPosition.position.x, 1.5f).OnComplete(delegate () {
             playerGO.transform.position = partsOfLevel[currentPart].PlayerStartPosition.position;
             playerGO.SetActive(true);
-            PlayerHelper.PAUSED = false;
-        });
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED);
+		});
     }
+
+	public void OnLevelEnd(bool has_won) {
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
+		if (has_won) {
+			Debug.Log("WON !");
+		} else {
+			playerGO.GetComponent<PlayerController>().OnPlayerDead();
+			Debug.Log("LOST");
+		}
+	}
 }

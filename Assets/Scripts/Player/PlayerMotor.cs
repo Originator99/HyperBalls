@@ -16,12 +16,10 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     private void Update() {
-        if (!PlayerHelper.PAUSED) { 
-            HandleMovement();
-        }
+		HandleMovement();
 
-
-        if (Input.GetKeyDown(KeyCode.PageUp)) {
+		if (Input.GetKeyDown(KeyCode.PageUp)) {
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED); //because game is paused when player is died
             GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
         }
 
@@ -31,7 +29,7 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (isGrounded && !PlayerHelper.PAUSED) {
+        if (isGrounded) {
             DoJump(JumpForceDefault);
         }
     }

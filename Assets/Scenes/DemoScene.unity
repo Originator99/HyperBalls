@@ -2996,6 +2996,7 @@ GameObject:
   - component: {fileID: 792511599}
   - component: {fileID: 792511600}
   - component: {fileID: 792511601}
+  - component: {fileID: 792511596}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3003,6 +3004,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &792511596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792511595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfec056e21e3ca94092cc37b06440a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AimGO: {fileID: 830281691}
+  PlayerMotor: {fileID: 792511600}
+  PlayerDash: {fileID: 792511601}
+  DyingEffect: {fileID: 3258510164386184312, guid: 687001dd0d4882245a075cda6a9b88bf,
+    type: 3}
 --- !u!4 &792511597
 Transform:
   m_ObjectHideFlags: 0
