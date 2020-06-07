@@ -60,7 +60,7 @@ public class LevelUpdate : MonoBehaviour {
                 if (ScoreManager.lives <= 0) {
                     GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, false);
                 } else {
-                    //levelController.ResetPart();
+					levelController.ResetPlayerPosition();
                 }
             }
         }

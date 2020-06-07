@@ -91,7 +91,24 @@ public class LevelController : MonoBehaviour {
 		});
     }
 
-	public void OnLevelEnd(bool has_won) {
+	/// <summary>
+	/// Runs when life of the player is decrase.
+	/// </summary>
+	public void ResetPlayerPosition() {
+		StartCoroutine(ResetPlayer());
+	}
+
+	private IEnumerator ResetPlayer() {
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
+		playerGO.SetActive(false);
+		playerGO.transform.position = partsOfLevel[currentPart].PlayerStartPosition.position;
+		yield return new WaitForSeconds(0.5f);
+		playerGO.SetActive(true);
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED);
+
+	}
+
+	private  void OnLevelEnd(bool has_won) {
 		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
 		if (has_won) {
 			Debug.Log("WON !");
