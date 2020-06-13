@@ -1,56 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMotor : MonoBehaviour {
+	public SimpleTouchController movementArea;
+	public float MoveSpeed = 7f;
 
-    private readonly float JumpForceDefault = 4f;
-    private bool isGrounded;
-    private Rigidbody2D rb;
+	private readonly float JumpForceDefault = 4f;
+	private bool isGrounded;
+	private Rigidbody2D rb;
 
-    private void Start() {
-        isGrounded = false;
-        rb = GetComponent<Rigidbody2D>();
-        GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+	private void Start() {
+		isGrounded = false;
+		rb = GetComponent<Rigidbody2D>();
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+	}
 
-    }
-
-    private void Update() {
+	private void Update() {
 		HandleMovement();
+	}
 
-		if (Input.GetKeyDown(KeyCode.PageUp)) {
-			GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED); //because game is paused when player is died
-            GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
-        }
+	private void FixedUpdate() {
+		if (isGrounded) {
+			DoJump(JumpForceDefault);
+		}
+	}
 
-        if (Input.GetKeyDown(KeyCode.PageDown)) {
-            Loader.Load(SceneName.Dashboard);
-        }
-    }
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.tag == "ground") {
+			isGrounded = true;
+		}
+		if (collision.gameObject.GetComponent<Obstacle>() != null) {
+			Debug.Log("Hit");
+			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit();
+		}
+	}
 
-    private void FixedUpdate() {
-        if (isGrounded) {
-            DoJump(JumpForceDefault);
-        }
-    }
+	private void DoJump(float jumpForce) {
+		rb.velocity = new Vector2(Mathf.Sqrt(2f * Physics2D.gravity.magnitude * jumpForce), rb.velocity.y);
+		isGrounded = false;
+	}
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "ground") {
-            isGrounded = true;
-        }
-        if (collision.gameObject.GetComponent<Obstacle>() != null) {
-            Debug.Log("Hit");
-            collision.gameObject.GetComponent<Obstacle>().OnPlayerHit();
-        }
-    }
-
-    private void DoJump(float jumpForce) {
-        rb.velocity = new Vector2(Mathf.Sqrt(2f * Physics2D.gravity.magnitude * jumpForce), rb.velocity.y);
-        isGrounded = false;
-    }
-
-    private void HandleMovement() {
-        transform.position += new Vector3(0, Input.GetAxisRaw("Vertical"), 0f) * 7f * Time.unscaledDeltaTime;
-    }
-
+	private void HandleMovement() {
+#if UNITY_EDITOR
+		transform.position += new Vector3(0, Input.GetAxisRaw("Vertical"), 0f) * MoveSpeed * Time.unscaledDeltaTime;
+#else
+		transform.position += new Vector3(0, movementArea.GetTouchPosition.y, 0f) * MoveSpeed * Time.unscaledDeltaTime;
+#endif
+	}
 }

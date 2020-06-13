@@ -24,7 +24,18 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    private void OnDestroy() {
+	private void Update() {
+		if (Input.GetKeyDown(KeyCode.PageUp)) {
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED); //because game is paused when player is died
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+		}
+
+		if (Input.GetKeyDown(KeyCode.PageDown)) {
+			Loader.Load(SceneName.Dashboard);
+		}
+	}
+
+	private void OnDestroy() {
         GameEventSystem.OnGameEventRaised -= HandleGameEvents;
     }
 
