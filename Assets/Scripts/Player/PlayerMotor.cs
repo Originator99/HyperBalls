@@ -14,7 +14,6 @@ public class PlayerMotor : MonoBehaviour {
 	private void Start() {
 		isGrounded = false;
 		rb = GetComponent<Rigidbody2D>();
-		GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
 	}
 
 	private void Update() {

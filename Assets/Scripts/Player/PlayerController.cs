@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DyingEffect;
 	private void Start() {
 		GameEventSystem.OnGameEventRaised += HandleGameEvents;
+		Invoke("StartLevel", 0.5f);
 	}
 	private void OnDestroy() {
 		GameEventSystem.OnGameEventRaised -= HandleGameEvents;
@@ -40,5 +41,9 @@ public class PlayerController : MonoBehaviour {
 		AimGO.SetActive(true);
 		PlayerMotor.enabled = true;
 		PlayerDash.enabled = true;
+	}
+
+	private void StartLevel() {
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
 	}
 }
