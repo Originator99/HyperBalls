@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveUpDown : MonoBehaviour {
-    public float moveSpeed = 5f;
+    private float moveSpeed = 5f;
 
     private int direction = 1;
 
-    private void Update() {
+	private void Start() {
+		moveSpeed = Random.Range(4f, 9f);
+	}
+
+	private void Update() {
         if (transform.position.y > 5)
             direction = -1;
         else if (transform.position.y < -5)

@@ -18,7 +18,8 @@ public class Obstacle : MonoBehaviour {
         }
     }
 
-    public void OnPlayerHit() {
+    public void OnPlayerHit(out LevelObjectType type) {
+		type = TypeOfObstacle;
         if (gameObject.activeSelf) {
             if (obstacleBlock != null && TypeOfObstacle == LevelObjectType.GOOD_BLOCK) {
                 EffectsController.instance.CameraShake();
@@ -30,7 +31,9 @@ public class Obstacle : MonoBehaviour {
     }
 
     public void DoDestroyEffect() {
-        GameObject temp = Instantiate(DestroyEffect, transform.position, Quaternion.identity);
+		if (DestroyEffect != null && gameObject.activeSelf) {
+			Instantiate(DestroyEffect, transform.position, Quaternion.identity);
+		}
         gameObject.SetActive(false);
     }
 }

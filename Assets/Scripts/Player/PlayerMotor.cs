@@ -32,7 +32,8 @@ public class PlayerMotor : MonoBehaviour {
 		}
 		if (collision.gameObject.GetComponent<Obstacle>() != null) {
 			Debug.Log("Hit");
-			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit();
+			LevelObjectType type = LevelObjectType.NONE;
+			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit(out type);
 		}
 	}
 

@@ -6,6 +6,7 @@ public class ObstacleBlock : MonoBehaviour {
     public int _id;
     public LevelObjectDifficulty difficulty;
     public Obstacle[] obstacles;
+	public bool autoDestroyBad = true;
 
     private void Awake() {
         if (obstacles == null && obstacles.Length <= 0) {
@@ -21,7 +22,7 @@ public class ObstacleBlock : MonoBehaviour {
     }
 
     public void DestroyAllBad() {
-        if (obstacles != null) { 
+        if (obstacles != null && autoDestroyBad) { 
             int total = obstacles.Length;
             for (int i = 0; i < total; i++) {
                 if (obstacles[i].TypeOfObstacle == LevelObjectType.BAD_BLOCK) {
