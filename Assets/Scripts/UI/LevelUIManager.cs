@@ -19,6 +19,7 @@ public class LevelUIManager : MonoBehaviour {
 
 	private void Start() {
 		GameEventSystem.OnGameEventRaised += HandleGameEvents;
+		gameOverController.gameObject.SetActive(false);
 	}
 	private void OnDestroy() {
 		GameEventSystem.OnGameEventRaised -= HandleGameEvents;

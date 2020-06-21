@@ -32,8 +32,6 @@ public class GameOverScreen : MonoBehaviour {
 		} else {
 			Debug.LogError("Retry Button is null in " + transform.name);
 		}
-
-		gameObject.SetActive(false);
 	}
 
 	public void ShowGameOver(bool hasWon) {
