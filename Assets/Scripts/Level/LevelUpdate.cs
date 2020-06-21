@@ -51,7 +51,7 @@ public class LevelUpdate : MonoBehaviour {
                 GOOD_BLOCK_COUNTER--;
                 if (GOOD_BLOCK_COUNTER <= 0) {
                     bool gameEnd = levelController.TrySwitchPart(levelController.GetNextPartIndex());
-                    if (gameEnd) {
+                    if (!gameEnd) {
                         GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, true);
                     }
                 }

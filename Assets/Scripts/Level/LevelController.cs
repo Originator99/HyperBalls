@@ -15,14 +15,22 @@ public class LevelController : MonoBehaviour {
         currentPart = 0;
         GameEventSystem.OnGameEventRaised += HandleGameEvents;
         playerGO = GameObject.FindGameObjectWithTag("Player");
-        if (playerGO == null) {
-            Debug.LogError("Player GO is null in Level Controller");
-        }
+		if (playerGO == null) {
+			Debug.LogError("Player GO is null in Level Controller");
+		} else {
+			playerGO.SetActive(false);
+		}
         levelUpdate = GetComponent<LevelUpdate>();
         if (levelUpdate == null) {
             Debug.LogError("Level update is null. Is it attached in the same GO as Level Controller?");
         }
-    }
+
+		Invoke("StartLevel", 1f);
+	}
+
+	private void StartLevel() {
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
+	}
 
 	private void Update() {
 		if (Input.GetKeyDown(KeyCode.PageUp)) {
@@ -49,7 +57,6 @@ public class LevelController : MonoBehaviour {
     }
 
     private void RestartLevel() {
-        playerGO.gameObject.SetActive(false);
         int totalParts = partsOfLevel.Length;
         for (int i = 0; i < totalParts; i++) {
             partsOfLevel[i].gameObject.SetActive(false);
@@ -93,8 +100,8 @@ public class LevelController : MonoBehaviour {
 
     private IEnumerator SwitchPart() {
 		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
-        yield return new WaitForSeconds(0.5f);
-        playerGO.SetActive(false);
+		playerGO.SetActive(false);
+		yield return new WaitForSeconds(0.5f);
         Room.transform.DOMoveX(partsOfLevel[currentPart].RoomPosition.position.x, 1.5f).OnComplete(delegate () {
             playerGO.transform.position = partsOfLevel[currentPart].PlayerStartPosition.position;
             playerGO.SetActive(true);
@@ -126,6 +133,10 @@ public class LevelController : MonoBehaviour {
 		} else {
 			playerGO.GetComponent<PlayerController>().OnPlayerDead();
 			Debug.Log("LOST");
+		}
+
+		if (LevelUIManager.instance != null) {
+			StartCoroutine(LevelUIManager.instance.ShowGameOverScreen(has_won));
 		}
 	}
 }

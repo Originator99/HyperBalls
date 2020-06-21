@@ -20,6 +20,10 @@ public class ScoreManager {
         Debug.Log("Current Score : " + currentScore);
     }
 
+	public static void SaveGame(bool hasWon) {
+
+	}
+
     public static void IncreaseCombo() {
         comboMultiplier++;
     }
@@ -38,4 +42,8 @@ public class ScoreManager {
                 return 50;
         }
     }
+
+	public static int GetTotalMoney() {
+		return currentScore;
+	}
 }

@@ -30,11 +30,6 @@ public class PlayerMotor : MonoBehaviour {
 		if (collision.gameObject.tag == "ground") {
 			isGrounded = true;
 		}
-		if (collision.gameObject.GetComponent<Obstacle>() != null) {
-			Debug.Log("Hit");
-			LevelObjectType type = LevelObjectType.NONE;
-			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit(out type);
-		}
 	}
 
 	private void DoJump(float jumpForce) {

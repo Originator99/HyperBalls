@@ -10,7 +10,7 @@ public class PlayerDash : MonoBehaviour {
     private bool isMoving;
     private float defaultGravityScale;
 
-    private void Start() {
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         defaultGravityScale = rb.gravityScale;
         target = transform.position;

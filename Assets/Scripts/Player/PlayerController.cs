@@ -12,8 +12,16 @@ public class PlayerController : MonoBehaviour {
 	public GameObject DyingEffect;
 	private void Start() {
 		GameEventSystem.OnGameEventRaised += HandleGameEvents;
-		Invoke("StartLevel", 0.5f);
 	}
+
+	private void Update() {
+		//RaycastHit2D hit = Physics2D.Raycast(RaycastPoint.position, Vector2.right, 0.2f);
+		//Debug.DrawRay(RaycastPoint.position, Vector2.right);
+		//if (hit.collider != null) {
+		//	Debug.Log("Hit Object : " + hit.collider.name);
+		//}
+	}
+
 	private void OnDestroy() {
 		GameEventSystem.OnGameEventRaised -= HandleGameEvents;
 	}
@@ -31,6 +39,13 @@ public class PlayerController : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.GetComponent<Obstacle>() != null) {
+			LevelObjectType type = LevelObjectType.NONE;
+			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit(out type);
+		}
+	}
+
 	private void OnGamePaused() {
 		AimGO.SetActive(false);
 		PlayerMotor.enabled = false;
@@ -41,9 +56,5 @@ public class PlayerController : MonoBehaviour {
 		AimGO.SetActive(true);
 		PlayerMotor.enabled = true;
 		PlayerDash.enabled = true;
-	}
-
-	private void StartLevel() {
-		GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_START);
 	}
 }
