@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour {
         if (instance == null) {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-		LevelHelper.Init();
-    }
+			LevelHelper.Init();
+		}
+	}
 
     #endregion
 

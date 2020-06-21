@@ -15,8 +15,6 @@ public class GameOverScreen : MonoBehaviour {
 		if (quitButton != null) {
 			quitButton.onClick.RemoveAllListeners();
 			quitButton.onClick.AddListener(delegate () {
-				//Save Game Here
-				ScoreManager.SaveGame(hasWon);
 				Loader.Load(SceneName.Dashboard);
 			});
 		} else {

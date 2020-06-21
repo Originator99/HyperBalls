@@ -534,6 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Room: {fileID: 1818485316}
+  levelData: {fileID: 11400000, guid: a7c4aee4d2f633a45ac2f033ead191ea, type: 2}
   partsOfLevel:
   - {fileID: 945390962}
   currentPart: 0

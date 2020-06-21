@@ -17,6 +17,9 @@ public static class LevelHelper {
 			LEVELS = new List<LevelData>();
 			LEVELS = collection.levels;
 			Debug.Log("Level Data Fetched");
+			foreach (var s in LEVELS) {
+				Debug.Log(s.id + "-" + s.sceneName + "-" + s.completed);
+			}
 		} else {
 			Debug.LogError("Level Collection type is not attached to resource fetched");
 		}
@@ -36,6 +39,17 @@ public static class LevelHelper {
 			}
 		} catch (Exception ex) {
 			Debug.LogError("Error Saving Level File..  :" + ex.Message);
+		}
+	}
+
+	public static void UpdateLevel(int id, bool isCompleted, int money_won) {
+		int index = LEVELS.FindIndex(x => x.id == id);
+		if (index >= 0 && LEVELS.Count > index) {
+			LEVELS[index].completed = isCompleted;
+			LEVELS[index].moneyEarned = money_won;
+			Debug.Log("Level Data updated");
+		} else {
+			Debug.LogError("Cannot find the index of level id : " + id);
 		}
 	}
 

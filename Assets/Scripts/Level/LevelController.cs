@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class LevelController : MonoBehaviour {
     public GameObject Room;
+	public LevelSO levelData;
     public LevelPart[] partsOfLevel;
     public int currentPart;
 
@@ -24,6 +25,9 @@ public class LevelController : MonoBehaviour {
         if (levelUpdate == null) {
             Debug.LogError("Level update is null. Is it attached in the same GO as Level Controller?");
         }
+		if (levelData == null) {
+			Debug.LogError("Level Data is null");
+		}
 
 		Invoke("StartLevel", 1f);
 	}
@@ -130,6 +134,11 @@ public class LevelController : MonoBehaviour {
 		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
 		if (has_won) {
 			Debug.Log("WON !");
+			if (levelData != null) {
+				LevelHelper.UpdateLevel(levelData.levelData.id, true, ScoreManager.GetTotalMoney());
+			} else {
+				Debug.LogError("Cannot update level, levelData is null");
+			}
 		} else {
 			playerGO.GetComponent<PlayerController>().OnPlayerDead();
 			Debug.Log("LOST");
