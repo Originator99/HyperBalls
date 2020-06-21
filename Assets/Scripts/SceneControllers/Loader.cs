@@ -42,5 +42,6 @@ public static class Loader {
 public enum SceneName { 
     Loader,
     Dashboard,
-    DemoScene
+    DemoScene,
+	LEVEL_1
 }

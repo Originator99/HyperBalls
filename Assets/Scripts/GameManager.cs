@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+		LevelHelper.Init();
     }
 
     #endregion
@@ -23,7 +24,11 @@ public class GameManager : MonoBehaviour {
         GameEventSystem.OnGameEventRaised += HandleGameEvents;
     }
 
-    private void Update() {
+	private void OnApplicationQuit() {
+		LevelHelper.SaveLevelData();
+	}
+
+	private void Update() {
         HandleSlowMotion();
     }
 

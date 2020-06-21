@@ -8,7 +8,7 @@ public class DashboardUIManager : MonoBehaviour {
     private void Start() {
         PlayButton.onClick.RemoveAllListeners();
         PlayButton.onClick.AddListener(delegate() {
-            Loader.Load(SceneName.DemoScene);
+            Loader.Load(SceneName.LEVEL_1);
         });
     }
 }
