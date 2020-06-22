@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37fc9faec7497604b8f2f02235a8e96a, type: 3}
-  m_Name: LevelCollection1
+  m_Script: {fileID: 11500000, guid: 63a591dca70f0014c817d5b06ee779c6, type: 3}
+  m_Name: LEVEL_2
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 11400000, guid: a7c4aee4d2f633a45ac2f033ead191ea, type: 2}
-  - {fileID: 11400000, guid: 93cb3afed2f59ff4396b1c7e4cc21eb8, type: 2}
+  levelData:
+    id: 2
+    sceneName: 4
+    completed: 0
+    moneyEarned: 0

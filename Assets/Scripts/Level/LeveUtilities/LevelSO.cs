@@ -13,4 +13,5 @@ public class LevelData {
 	public SceneName sceneName;
 	public bool completed;
 	public int moneyEarned;
+	public int difficulty;
 }
