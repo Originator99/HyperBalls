@@ -24,10 +24,6 @@ public class GameManager : MonoBehaviour {
         GameEventSystem.OnGameEventRaised += HandleGameEvents;
     }
 
-	private void OnApplicationQuit() {
-		LevelHelper.SaveLevelData();
-	}
-
 	private void Update() {
         HandleSlowMotion();
     }

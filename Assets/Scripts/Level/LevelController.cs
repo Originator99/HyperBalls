@@ -141,6 +141,7 @@ public class LevelController : MonoBehaviour {
 			Debug.Log("WON !");
 			if (levelData != null) {
 				LevelHelper.UpdateLevel(levelData.levelData.id, true, ScoreManager.GetTotalMoney());
+				LevelHelper.SaveLevelData();
 			} else {
 				Debug.LogError("Cannot update level, levelData is null");
 			}

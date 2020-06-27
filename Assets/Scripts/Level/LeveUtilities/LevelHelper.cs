@@ -16,10 +16,6 @@ public static class LevelHelper {
 		if (collection != null) {
 			LEVELS = new List<LevelData>();
 			LEVELS = collection.levels;
-			Debug.Log("Level Data Fetched");
-			foreach (var s in LEVELS) {
-				Debug.Log(s.id + "-" + s.sceneName + "-" + s.completed);
-			}
 		} else {
 			Debug.LogError("Level Collection type is not attached to resource fetched");
 		}
@@ -79,5 +75,11 @@ public static class LevelHelper {
 			Debug.LogError("Could not find level collection asset in resources folder");
 		}
 		return null;
+	}
+
+	private static void Extension() {
+		for (int i = 0; i < 100; i++) {
+			LEVELS.Add(LEVELS[0]);
+		}
 	}
 }
