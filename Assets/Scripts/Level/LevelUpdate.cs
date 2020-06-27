@@ -50,6 +50,7 @@ public class LevelUpdate : MonoBehaviour {
                 ScoreManager.AddScore(data.TypeOfObstacle, data.obstacleBlock.difficulty, data.obstacleBlock._id);
                 GOOD_BLOCK_COUNTER--;
                 if (GOOD_BLOCK_COUNTER <= 0) {
+					levelController.DeactiveCurrentPart();
                     bool gameEnd = levelController.TrySwitchPart(levelController.GetNextPartIndex());
                     if (!gameEnd) {
                         GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, true);

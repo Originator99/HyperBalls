@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 635532006}
   m_Layer: 0
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: LevelController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -736,6 +736,7 @@ MonoBehaviour:
   RoomPosition: {fileID: 1641535033}
   PlayerStartPosition: {fileID: 1271783035}
   TotalGood: 4
+  IsCurrentlyActive: 0
 --- !u!4 &1016476360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1274543698282656388, guid: d52cc2fa7ff39524babe438feff75eaa,
@@ -1182,6 +1183,7 @@ MonoBehaviour:
   RoomPosition: {fileID: 260462305}
   PlayerStartPosition: {fileID: 1060770315}
   TotalGood: 1
+  IsCurrentlyActive: 0
 --- !u!4 &2096852626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 689267685004353419, guid: 74adfcb3342ff164e8cf7fb1b5c02d0f,

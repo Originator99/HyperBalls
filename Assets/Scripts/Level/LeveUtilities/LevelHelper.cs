@@ -8,7 +8,7 @@ using System;
 public static class LevelHelper {
 	public static List<LevelData> LEVELS;
 
-	private static string saveFilePath = Application.persistentDataPath + "/level.hyperballs";
+	private static readonly string saveFilePath = Application.persistentDataPath + "/level.hyperballs";
 
 	public static void Init() {
 		Debug.Log("Path  : " + saveFilePath);

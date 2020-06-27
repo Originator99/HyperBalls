@@ -43,7 +43,7 @@ public class LevelController : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown(KeyCode.PageDown)) {
-			Loader.Load(SceneName.Dashboard);
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.USE_SKILL, 1);
 		}
 	}
 
@@ -89,8 +89,9 @@ public class LevelController : MonoBehaviour {
             currentPart = index;
             partsOfLevel[currentPart].gameObject.SetActive(true);
             partsOfLevel[currentPart].ResetPart();
+			partsOfLevel[currentPart].IsCurrentlyActive = true;
             levelUpdate.GOOD_BLOCK_COUNTER = partsOfLevel[currentPart].TotalGood;
-            playerGO.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			playerGO.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             StartCoroutine(SwitchPart());
             return true;
         } else {
@@ -102,11 +103,15 @@ public class LevelController : MonoBehaviour {
         return currentPart + 1;
     }
 
-    private IEnumerator SwitchPart() {
+	public void DeactiveCurrentPart() {
+		partsOfLevel[currentPart].IsCurrentlyActive = false;
+	}
+
+	private IEnumerator SwitchPart() {
 		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
 		playerGO.SetActive(false);
 		yield return new WaitForSeconds(0.5f);
-        Room.transform.DOMoveX(partsOfLevel[currentPart].RoomPosition.position.x, 1.5f).OnComplete(delegate () {
+		Room.transform.DOMoveX(partsOfLevel[currentPart].RoomPosition.position.x, 1.5f).OnComplete(delegate () {
             playerGO.transform.position = partsOfLevel[currentPart].PlayerStartPosition.position;
             playerGO.SetActive(true);
 			GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_UNPAUSED);

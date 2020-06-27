@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour {
 			OnGamePaused();
 		} else if (type == GAME_EVENT.GAME_UNPAUSED) { //Called from LevelController when the parts are DONE being switched
 			OnGameUnPaused();
+		} else if (type == GAME_EVENT.USE_SKILL) {
+			if (EffectsController.instance != null) {
+				EffectsController.instance.UseSkill((int)data, transform);
+			} else {
+				Debug.LogError("Effects controller instance is null");
+			}
 		}
 	}
 

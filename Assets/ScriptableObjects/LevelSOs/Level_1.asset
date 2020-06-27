@@ -17,3 +17,4 @@ MonoBehaviour:
     sceneName: 3
     completed: 0
     moneyEarned: 0
+    difficulty: 1

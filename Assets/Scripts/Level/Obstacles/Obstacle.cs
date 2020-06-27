@@ -5,6 +5,9 @@ public class Obstacle : MonoBehaviour {
     public LevelObjectType TypeOfObstacle;
     public ObstacleBlock obstacleBlock;
 
+	[HideInInspector]
+	public string UniqueID;
+
     private void Awake() {
         if (gameObject.tag.ToLower() == "good")
             TypeOfObstacle = LevelObjectType.GOOD_BLOCK;
@@ -16,6 +19,7 @@ public class Obstacle : MonoBehaviour {
         if (obstacleBlock == null) {
             Debug.LogError("Parent of obstacle is null. Object Name : " + gameObject.name + " Parent : " + transform.parent.name);
         }
+		UniqueID = Helper.GenerateID();
     }
 
     public void OnPlayerHit(out LevelObjectType type) {

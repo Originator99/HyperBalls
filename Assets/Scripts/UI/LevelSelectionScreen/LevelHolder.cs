@@ -20,11 +20,12 @@ public class LevelHolder : MonoBehaviour {
 		leveNumber.text = _id;
 		int count = 1;
 		foreach (Transform star in starsPanel) {
-			if (count >= data.difficulty) {
+			if (count <= data.difficulty) {
 				star.gameObject.SetActive(true);
 			} else {
 				star.gameObject.SetActive(false);
 			}
+			count++;
 		}
 		if (data.completed) {
 			completedPanel.gameObject.SetActive(true);
