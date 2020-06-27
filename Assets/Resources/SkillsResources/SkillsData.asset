@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6d859b7e689284e9e84774176c9ca7, type: 3}
+  m_Name: SkillsData
+  m_EditorClassIdentifier: 
+  skills:
+  - Id: 1
+    Name: Bad Missile
+    Desc: Fucks up the nearest obstacle
+    Icon: {fileID: 21300000, guid: ed752091fb9710d44ac90905ef30fd52, type: 3}
+    SkillType: 1
+    Cost: 500

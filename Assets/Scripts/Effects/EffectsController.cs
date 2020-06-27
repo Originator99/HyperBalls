@@ -58,6 +58,7 @@ public class EffectsController : MonoBehaviour {
 				ISkill controller = go.GetComponent<ISkill>();
 				if (controller != null) {
 					controller.UseSkill(closest_bad_obj);
+					InventoryHelper.UpdateSkills(1, -1);
 				} else {
 					Debug.LogError("ISkill interface not implemented for : " + go.name);
 				}

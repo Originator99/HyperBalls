@@ -4,6 +4,5 @@
 
 public enum SkillType {
 	BUFF,
-	BAD_BLOCK_DAMAGE,
-	GOOD_BLOCK_DAMAGE
+	UTILITY,
 }

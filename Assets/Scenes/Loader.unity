@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 1431145556}
   m_Layer: 8
   m_Name: PostProcessingVolume
-  m_TagString: Untagged
+  m_TagString: PostProcessing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
