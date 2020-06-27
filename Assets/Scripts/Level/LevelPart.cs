@@ -19,7 +19,7 @@ public class LevelPart : MonoBehaviour {
         }
     }
 
-	public Obstacle FindClosestObstacle(Vector3 startPosition, LevelObjectType type) {
+	public Obstacle FindClosestObstacleForMissile(Vector3 startPosition, LevelObjectType type, int missileID) {
 		Obstacle closest = null;
 		if (IsCurrentlyActive) {
 			int total_count = transform.childCount;
@@ -29,9 +29,7 @@ public class LevelPart : MonoBehaviour {
 					int total_obstacles = block.obstacles.Length;
 					for (int j = 0; j < total_obstacles; j++) {
 						if (block.obstacles[j].gameObject.activeSelf && block.obstacles[j].TypeOfObstacle == type) {
-							if (closest != null && Vector3.Distance(startPosition, block.obstacles[j].transform.position) < Vector3.Distance(startPosition, closest.transform.position)) {
-								closest = block.obstacles[j];
-							} else {
+							if (missileID == 1 && !SkillsHandler.CheckIfTargetExistsForBadMissile(block.obstacles[j].UniqueID)) {
 								closest = block.obstacles[j];
 							}
 						}

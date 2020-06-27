@@ -52,7 +52,7 @@ public class EffectsController : MonoBehaviour {
 	private void DoBadMissileSkill(Vector3 startPosition) {
 		int total_parts = levelController.partsOfLevel.Length;
 		for (int i = 0; i < total_parts; i++) {
-			Obstacle closest_bad_obj = levelController.partsOfLevel[i].FindClosestObstacle(startPosition, LevelObjectType.BAD_BLOCK);
+			Obstacle closest_bad_obj = levelController.partsOfLevel[i].FindClosestObstacleForMissile(startPosition, LevelObjectType.BAD_BLOCK, 1);
 			if (closest_bad_obj != null) {
 				GameObject go = Instantiate(BadMissilePrefab, startPosition, Quaternion.identity);
 				ISkill controller = go.GetComponent<ISkill>();
