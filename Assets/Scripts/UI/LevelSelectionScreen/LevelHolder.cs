@@ -11,6 +11,7 @@ public class LevelHolder : MonoBehaviour {
 	public Button button;
 
 	public void RenderLevelBox(LevelData data) {
+		gameObject.SetActive(true);
 		difficulty.text = GetDifficulty(data.difficulty);
 		difficultyPanelImage.color = GetDifficultyColor(data.difficulty);
 		string _id = data.id.ToString();

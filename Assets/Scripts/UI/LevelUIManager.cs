@@ -38,8 +38,8 @@ public class LevelUIManager : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator ShowGameOverScreen(bool hasWon) {
+	public IEnumerator ShowGameOverScreen(bool hasWon, int moneyEarned) {
 		yield return new WaitForSeconds(1f);// waiting for shit to get settled before showing the damn screen
-		gameOverController.ShowGameOver(hasWon);
+		gameOverController.ShowGameOver(hasWon, moneyEarned);
 	}
 }

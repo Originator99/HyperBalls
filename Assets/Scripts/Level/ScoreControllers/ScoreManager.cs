@@ -39,7 +39,9 @@ public class ScoreManager {
         }
     }
 
-	public static int GetTotalMoney() {
+	public static int GetTotalMoney(bool wasAlreadyCompleted) {
+		if (wasAlreadyCompleted)
+			return Random.Range(100, 250);
 		return currentScore;
 	}
 }

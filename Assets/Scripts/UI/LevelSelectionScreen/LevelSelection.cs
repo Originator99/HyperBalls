@@ -33,7 +33,6 @@ public class LevelSelection : MonoBehaviour {
 					if (holder != null) {
 						holder.RenderLevelBox(data[index_counter]);
 						index_counter++;
-						child.gameObject.SetActive(true);
 					}
 				}
 			}

@@ -49,6 +49,16 @@ public static class LevelHelper {
 		}
 	}
 
+	public static LevelData GetLevelData(int id) {
+		if (LEVELS != null) {
+			int index = LEVELS.FindIndex(x => x.id == id);
+			if (index != -1) {
+				return LEVELS[index];
+			}
+		}
+		return null;
+	}
+
 	private static LevelCollection LoadLevelData() {
 		if (File.Exists(saveFilePath)) {
 			BinaryFormatter formatter = new BinaryFormatter();

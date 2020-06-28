@@ -27,6 +27,11 @@ public class LevelController : MonoBehaviour {
         }
 		if (levelData == null) {
 			Debug.LogError("Level Data is null");
+		} else {
+			var temp = LevelHelper.GetLevelData(levelData.levelData.id);
+			if (temp != null) {
+				levelData.levelData = temp;
+			}
 		}
 
 		Invoke("StartLevel", 1f);
@@ -137,11 +142,15 @@ public class LevelController : MonoBehaviour {
 
 	private  void OnLevelEnd(bool has_won) {
 		GameEventSystem.RaiseGameEvent(GAME_EVENT.GAME_PAUSED);
+		int money_earned = 0;
 		if (has_won) {
 			Debug.Log("WON !");
 			if (levelData != null) {
-				LevelHelper.UpdateLevel(levelData.levelData.id, true, ScoreManager.GetTotalMoney());
+				money_earned = ScoreManager.GetTotalMoney(levelData.levelData.completed);
+				LevelHelper.UpdateLevel(levelData.levelData.id, true, money_earned);
 				LevelHelper.SaveLevelData();
+				InventoryHelper.UpdateMoney(money_earned);
+				InventoryHelper.SavePlayerData();
 			} else {
 				Debug.LogError("Cannot update level, levelData is null");
 			}
@@ -151,7 +160,7 @@ public class LevelController : MonoBehaviour {
 		}
 
 		if (LevelUIManager.instance != null) {
-			StartCoroutine(LevelUIManager.instance.ShowGameOverScreen(has_won));
+			StartCoroutine(LevelUIManager.instance.ShowGameOverScreen(has_won, money_earned));
 		}
 	}
 }

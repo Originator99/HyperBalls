@@ -32,7 +32,7 @@ public class GameOverScreen : MonoBehaviour {
 		}
 	}
 
-	public void ShowGameOver(bool hasWon) {
+	public void ShowGameOver(bool hasWon, int moneyEarned) {
 		this.hasWon = hasWon;
 
 		gameObject.SetActive(true);
@@ -46,7 +46,7 @@ public class GameOverScreen : MonoBehaviour {
 			header = "LOSS";
 		}
 		StartCoroutine(TypeWriterEffect(header, levelOutputText));
-		moneyText.text = "$" + ScoreManager.GetTotalMoney();
+		moneyText.text = "$" + moneyEarned;
 	}
 
 	private IEnumerator TypeWriterEffect(string text, Text textComponent) {

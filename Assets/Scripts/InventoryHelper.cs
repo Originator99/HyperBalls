@@ -68,7 +68,7 @@ public static class InventoryHelper {
 	}
 
 	public static void UpdateSkills(int skillID, int amount) {
-		if (PLAYER_DATA != null && PLAYER_DATA.PlayerSkillsData!=null) {
+		if (PLAYER_DATA != null && PLAYER_DATA.PlayerSkillsData != null) {
 			if (PLAYER_DATA.PlayerSkillsData.FindIndex(x => x.SkillID == skillID) == -1) {
 				PlayerSkillsData data = new PlayerSkillsData(skillID, 0);
 				PLAYER_DATA.PlayerSkillsData.Add(data);
@@ -84,5 +84,15 @@ public static class InventoryHelper {
 				}
 			}
 		}
+	}
+
+	public static int GetCurrentSkillCount(int skillID){
+		if (PLAYER_DATA != null && PLAYER_DATA.PlayerSkillsData != null) {
+			int index = PLAYER_DATA.PlayerSkillsData.FindIndex(x => x.SkillID == skillID);
+			if (index != -1) {
+				return PLAYER_DATA.PlayerSkillsData[index].TotalAmount;
+			}
+		}
+		return 0;
 	}
 }
