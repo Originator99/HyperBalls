@@ -38,6 +38,7 @@ public class LevelUIManager : MonoBehaviour {
 			Debug.LogError("Game Over Controller is null in : " + transform.name);
 		}
 		if (skillPanelController != null) {
+			skillPanelController.gameObject.SetActive(true);
 			skillPanelController.RenderSkillsPanel(InventoryHelper.SKILLS);
 		} else {
 			Debug.LogError("Skills Panel is null in : " + transform.name);
@@ -45,6 +46,7 @@ public class LevelUIManager : MonoBehaviour {
 	}
 
 	public IEnumerator ShowGameOverScreen(bool hasWon, int moneyEarned) {
+		skillPanelController.gameObject.SetActive(false);
 		yield return new WaitForSeconds(1f);// waiting for shit to get settled before showing the damn screen
 		gameOverController.ShowGameOver(hasWon, moneyEarned);
 	}

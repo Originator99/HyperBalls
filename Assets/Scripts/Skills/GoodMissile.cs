@@ -15,7 +15,7 @@ public class GoodMissile : MonoBehaviour, ISkill {
 			Vector3 diff = target.transform.position - transform.position;
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
-			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.unscaledDeltaTime);
 		}
 		CheckForTimeout();
 	}
