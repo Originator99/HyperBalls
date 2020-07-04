@@ -48,7 +48,7 @@ public class LevelController : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown(KeyCode.PageDown)) {
-			GameEventSystem.RaiseGameEvent(GAME_EVENT.USE_SKILL, 1);
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.USE_SKILL, 2);
 		}
 	}
 

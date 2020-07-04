@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Finds the nearest red / bad item and blows it
-/// </summary>
-public class BadMissile : MonoBehaviour, ISkill {
-
+public class GoodMissile : MonoBehaviour, ISkill {
 	private float speed = 10f;
 
 	private bool acquired_target;
@@ -24,7 +20,12 @@ public class BadMissile : MonoBehaviour, ISkill {
 	private void OnTriggerEnter2D(Collider2D collision) {
 		Obstacle obs = collision.gameObject.GetComponent<Obstacle>();
 		if (obs != null && obs.UniqueID == target.UniqueID) {
-			obs.DoDestroyEffect();
+			if (obs.TypeOfObstacle == LevelObjectType.GOOD_BLOCK) {
+				obs.OnPlayerHit(out LevelObjectType type);
+			} else {
+				Debug.LogWarning("Good Missile Script collided with obstacle which is not good.. So just destroying the objection now");
+				obs.DoDestroyEffect();
+			}
 			acquired_target = false;
 			SkillsHandler.OnMissileCollide(target.UniqueID);
 			gameObject.SetActive(false);
@@ -33,7 +34,7 @@ public class BadMissile : MonoBehaviour, ISkill {
 		}
 	}
 
-	public void UseSkill(System.Object data) {
+	public void UseSkill(object data) {
 		gameObject.SetActive(true);
 		if (data != null && data.GetType() == typeof(Obstacle)) {
 			target = (Obstacle)data;

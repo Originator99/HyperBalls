@@ -1,4 +1,5 @@
 ﻿public interface ISkill {
+	Obstacle GetTarget();
 	void UseSkill(System.Object data);
 }
 

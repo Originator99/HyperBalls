@@ -46,3 +46,5 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   BadMissilePrefab: {fileID: 472009471205997046, guid: 85434921ee790f14e9e4407dcef0998a,
     type: 3}
+  GoodMissilePrefab: {fileID: 3721780778525296005, guid: 75eba31032277bb479775eae3c9da82a,
+    type: 3}

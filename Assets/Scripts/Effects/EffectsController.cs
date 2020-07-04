@@ -12,6 +12,7 @@ public class EffectsController : MonoBehaviour {
 
 	[Header("Skills Prefabs")]
 	public GameObject BadMissilePrefab;
+	public GameObject GoodMissilePrefab;
 
 	private LevelController levelController;
 
@@ -42,23 +43,39 @@ public class EffectsController : MonoBehaviour {
 	public void UseSkill(int id, Transform player) {
 		switch (id) {
 			case 1:
-				DoBadMissileSkill(player.position);
+				DoMissileSkill(player.position, 1);
 				break;
 			case 2:
+				DoMissileSkill(player.position, 2);
 				break;
 		}
 	}
 
-	private void DoBadMissileSkill(Vector3 startPosition) {
+	private void DoMissileSkill(Vector3 startPosition, int skillID) {
 		int total_parts = levelController.partsOfLevel.Length;
+		LevelObjectType type = LevelObjectType.NONE;
+		GameObject missilePrefab = null;
+		if (skillID == 1) {
+			missilePrefab = BadMissilePrefab;
+			type = LevelObjectType.BAD_BLOCK;
+		} else if (skillID == 2) {
+			missilePrefab = GoodMissilePrefab;
+			type = LevelObjectType.GOOD_BLOCK;
+		} else if (type == LevelObjectType.NONE) {
+			Debug.LogError("Cant do missile skill : Invalid skill ID");
+			return;
+		} else if (missilePrefab == null) {
+			Debug.LogError("Missile Prefab is null");
+			return;
+		}
 		for (int i = 0; i < total_parts; i++) {
-			Obstacle closest_bad_obj = levelController.partsOfLevel[i].FindClosestObstacleForMissile(startPosition, LevelObjectType.BAD_BLOCK, 1);
-			if (closest_bad_obj != null) {
-				GameObject go = Instantiate(BadMissilePrefab, startPosition, Quaternion.identity);
+			Obstacle closest_obstacle = levelController.partsOfLevel[i].FindClosestObstacleForMissile(startPosition, type);
+			if (closest_obstacle != null) {
+				GameObject go = Instantiate(missilePrefab, startPosition, Quaternion.identity);
 				ISkill controller = go.GetComponent<ISkill>();
 				if (controller != null) {
-					controller.UseSkill(closest_bad_obj);
-					InventoryHelper.UpdateSkills(1, -1);
+					controller.UseSkill(closest_obstacle);
+					InventoryHelper.UpdateSkills(skillID, -1);
 				} else {
 					Debug.LogError("ISkill interface not implemented for : " + go.name);
 				}
