@@ -76,6 +76,9 @@ public class EffectsController : MonoBehaviour {
 				if (controller != null) {
 					controller.UseSkill(closest_obstacle);
 					InventoryHelper.UpdateSkills(skillID, -1);
+					if (LevelUIManager.instance != null) {
+						LevelUIManager.instance.RefreshSkills(skillID);
+					}
 				} else {
 					Debug.LogError("ISkill interface not implemented for : " + go.name);
 				}

@@ -8,6 +8,7 @@ using UnityEngine;
 public class BadMissile : MonoBehaviour, ISkill {
 
 	private float speed = 10f;
+	private float timeout = 3f;
 
 	private bool acquired_target;
 	private Obstacle target;
@@ -18,6 +19,20 @@ public class BadMissile : MonoBehaviour, ISkill {
 			float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
 			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+
+			CheckForTimeout();
+		}
+	}
+
+	private void CheckForTimeout() {
+		//means the object has been disabled from elsewhere and the missile keeps spinning
+		if (Vector3.Distance(transform.position, target.transform.position) <= 0.1f) {
+			timeout -= Time.deltaTime;
+			if (timeout <= 0) {
+				acquired_target = false;
+				gameObject.SetActive(false);
+				Destroy(gameObject, 3f);
+			}
 		}
 	}
 
@@ -29,7 +44,6 @@ public class BadMissile : MonoBehaviour, ISkill {
 			SkillsHandler.OnMissileCollide(target.UniqueID);
 			gameObject.SetActive(false);
 			Destroy(gameObject, 3f);
-			Debug.Log("Target position reached");
 		}
 	}
 

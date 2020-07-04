@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LevelUIManager : MonoBehaviour {
 	public GameOverScreen gameOverController;
+	public LevelSkillsPanel skillPanelController;
 
 	public static LevelUIManager instance;
 
@@ -36,10 +37,21 @@ public class LevelUIManager : MonoBehaviour {
 		} else {
 			Debug.LogError("Game Over Controller is null in : " + transform.name);
 		}
+		if (skillPanelController != null) {
+			skillPanelController.RenderSkillsPanel(InventoryHelper.SKILLS);
+		} else {
+			Debug.LogError("Skills Panel is null in : " + transform.name);
+		}
 	}
 
 	public IEnumerator ShowGameOverScreen(bool hasWon, int moneyEarned) {
 		yield return new WaitForSeconds(1f);// waiting for shit to get settled before showing the damn screen
 		gameOverController.ShowGameOver(hasWon, moneyEarned);
+	}
+
+	public void RefreshSkills(int skillID) {
+		if (skillPanelController != null) {
+			skillPanelController.AfterSkillUsed(skillID);
+		}
 	}
 }
