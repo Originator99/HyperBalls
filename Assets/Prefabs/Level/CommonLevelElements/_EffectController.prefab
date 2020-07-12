@@ -48,3 +48,5 @@ MonoBehaviour:
     type: 3}
   GoodMissilePrefab: {fileID: 3721780778525296005, guid: 75eba31032277bb479775eae3c9da82a,
     type: 3}
+  bombardaPrefab: {fileID: 1159086012653154925, guid: 1c4bb78a03b95a9439e264535bc3dd14,
+    type: 3}

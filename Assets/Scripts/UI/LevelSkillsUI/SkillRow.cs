@@ -47,6 +47,6 @@ public class SkillRow : MonoBehaviour {
 
 	private void DoAnimation() {
 		transform.localScale = new Vector3(0, 0, 0);
-		transform.DOScale(new Vector3(1, 1, 1), 0.55f).SetEase(Ease.OutBounce);
+		transform.DOScale(new Vector3(1, 1, 1), 0.55f);
 	}
 }
