@@ -14,6 +14,7 @@ public class EffectsController : MonoBehaviour {
 	public GameObject BadMissilePrefab;
 	public GameObject GoodMissilePrefab;
 	public GameObject bombardaPrefab;
+	public GameObject NuclearPrefab;
 
 	private LevelController levelController;
 
@@ -51,6 +52,9 @@ public class EffectsController : MonoBehaviour {
 				break;
 			case 3:
 				DoBombardaSkill(player.position, 3);
+				break;
+			case 4:
+				DoNuclearSkill(levelController.partsOfLevel[levelController.currentPart].transform.position, 4);
 				break;
 		}
 	}
@@ -99,6 +103,20 @@ public class EffectsController : MonoBehaviour {
 			if (LevelUIManager.instance != null) {
 				LevelUIManager.instance.RefreshSkills(skillID);
 			}
+		} else {
+			Debug.LogError("ISkill interface not implemented for : " + go.name);
+		}
+	}
+
+	private void DoNuclearSkill(Vector3 startPosition, int skillID) {
+		GameObject go = Instantiate(NuclearPrefab, startPosition, Quaternion.identity);
+		ISkill controller = go.GetComponent<ISkill>();
+		if (controller != null) {
+			controller.UseSkill(startPosition);
+			//InventoryHelper.UpdateSkills(skillID, -1);
+			//if (LevelUIManager.instance != null) {
+			//	LevelUIManager.instance.RefreshSkills(skillID);
+			//}
 		} else {
 			Debug.LogError("ISkill interface not implemented for : " + go.name);
 		}

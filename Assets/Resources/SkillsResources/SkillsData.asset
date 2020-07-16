@@ -31,3 +31,9 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 98725e74e809780418b20aa067d4d7be, type: 3}
     SkillType: 1
     Cost: 0
+  - Id: 4
+    Name: Nuclear
+    Desc: BOOM!
+    Icon: {fileID: 21300000, guid: f5c29b00aea4c7948bd49b63d7e03e5a, type: 3}
+    SkillType: 1
+    Cost: 0
