@@ -10,7 +10,7 @@ public class ScoreManager {
     public static void InitScoreManager() {
         currentScore = 0;
         comboMultiplier = 1;
-        lives = 2;
+		lives = 0;
     }
 
     public static void AddScore(LevelObjectType type, LevelObjectDifficulty difficulty, int obstacleBlockID) {
@@ -19,6 +19,10 @@ public class ScoreManager {
         }
         Debug.Log("Current Score : " + currentScore);
     }
+
+	public static void UpdateLife(int amount) {
+		lives += amount;
+	}
 
     public static void IncreaseCombo() {
         comboMultiplier++;

@@ -15,4 +15,6 @@ public class SkillData {
 	public Sprite Icon;
 	public SkillType SkillType;
 	public int Cost;
+	public int UnlocksAtLevel;
+	public bool CanOnlyUseOnce;
 }

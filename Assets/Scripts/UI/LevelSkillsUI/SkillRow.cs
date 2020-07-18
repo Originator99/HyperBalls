@@ -8,16 +8,12 @@ public class SkillRow : MonoBehaviour {
 	public Image icon;
 	public Text totalCount;
 	public Button button;
-	public int currentSkillID;
+	public SkillData currentSkill;
 
 	private int currentCount;
-	private Vector3 originalScale;
-	private void Start() {
-		originalScale = transform.localScale;
-	}
 
 	public void RenderSkillBlock(SkillData data) {
-		currentSkillID = data.Id;
+		currentSkill = data;
 		gameObject.SetActive(true);
 		currentCount = InventoryHelper.GetCurrentSkillCount(data.Id);
 		if (currentCount > 0) {
@@ -39,7 +35,7 @@ public class SkillRow : MonoBehaviour {
 	public void AfterSkillUsed() {
 		currentCount--;
 		totalCount.text = currentCount.ToString();
-		if (currentCount <= 0) {
+		if (currentCount <= 0 || currentSkill.CanOnlyUseOnce) {
 			icon.color = Helper.HexToColor("FFFFFF83");
 			button.onClick.RemoveAllListeners();
 		}
@@ -47,6 +43,6 @@ public class SkillRow : MonoBehaviour {
 
 	private void DoAnimation() {
 		transform.localScale = new Vector3(0, 0, 0);
-		transform.DOScale(new Vector3(1, 1, 1), 0.55f);
+		transform.DOScale(new Vector3(1,1,1), 0.55f);
 	}
 }

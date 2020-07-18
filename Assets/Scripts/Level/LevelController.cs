@@ -48,7 +48,8 @@ public class LevelController : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown(KeyCode.PageDown)) {
-			GameEventSystem.RaiseGameEvent(GAME_EVENT.USE_SKILL, 4);
+			//GameEventSystem.RaiseGameEvent(GAME_EVENT.USE_SKILL, 4);
+			GameEventSystem.RaiseGameEvent(GAME_EVENT.UPDATE_LIFE, 1);
 		}
 	}
 
@@ -63,6 +64,10 @@ public class LevelController : MonoBehaviour {
         if (type == GAME_EVENT.LEVEL_END && data!=null && data.GetType() == typeof(bool)) {
 			OnLevelEnd((bool)data);
         }
+
+		if (type == GAME_EVENT.UPDATE_LIFE && data!=null && data.GetType() == typeof(int)) {
+			ScoreManager.UpdateLife((int)data);
+		}
     }
 
     private void RestartLevel() {

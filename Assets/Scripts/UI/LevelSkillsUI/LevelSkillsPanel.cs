@@ -25,8 +25,11 @@ public class LevelSkillsPanel : MonoBehaviour {
 			int index = 0;
 			for (int i = 0; i < total; i++) {
 				SkillRow row = content.GetChild(i).GetComponent<SkillRow>();
+				SkillData skill_data = data[index];
 				if (row != null) {
-					row.RenderSkillBlock(data[index]);
+					if (EffectsController.instance.GetCurrentLevel() >= skill_data.UnlocksAtLevel) {
+						row.RenderSkillBlock(skill_data);
+					}
 					index++;
 				}
 			}
@@ -38,7 +41,7 @@ public class LevelSkillsPanel : MonoBehaviour {
 	public void AfterSkillUsed(int skillId) {
 		foreach (Transform child in content) {
 			SkillRow row = child.GetComponent<SkillRow>();
-			if (row != null && row.currentSkillID == skillId) {
+			if (row != null && row.currentSkill.Id == skillId) {
 				row.AfterSkillUsed();
 			}
 		}

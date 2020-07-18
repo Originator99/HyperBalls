@@ -14,4 +14,5 @@ public class LevelData {
 	public bool completed;
 	public int moneyEarned;
 	public int difficulty;
+	public int maxLives;
 }

@@ -15,6 +15,7 @@ MonoBehaviour:
   levelData:
     id: 1
     sceneName: 3
-    completed: 0
-    moneyEarned: 0
+    completed: 1
+    moneyEarned: 210
     difficulty: 1
+    maxLives: 2

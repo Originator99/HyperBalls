@@ -50,3 +50,5 @@ MonoBehaviour:
     type: 3}
   bombardaPrefab: {fileID: 1159086012653154925, guid: 1c4bb78a03b95a9439e264535bc3dd14,
     type: 3}
+  NuclearPrefab: {fileID: 8665031279308562040, guid: ee797cc1f36fe8d489c758f8974474c1,
+    type: 3}

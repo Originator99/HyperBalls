@@ -31,9 +31,10 @@ public class LevelUpdate : MonoBehaviour {
         }
     }
 
-    public void ResetLevel() { 
-        ScoreManager.InitScoreManager();
-    }
+    public void ResetLevel() {
+		ScoreManager.InitScoreManager();
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.UPDATE_LIFE, levelController.levelData.levelData.maxLives);
+	}
 
     /// <summary>
     /// Called when player hits an obstacle. Adds score, changes level parts and ends the game if no more parts remain
@@ -57,8 +58,9 @@ public class LevelUpdate : MonoBehaviour {
                     }
                 }
             } else if(data.TypeOfObstacle == LevelObjectType.BAD_BLOCK) {
-                ScoreManager.lives--;
-                if (ScoreManager.lives <= 0) {
+				int current = ScoreManager.lives - 1;
+				GameEventSystem.RaiseGameEvent(GAME_EVENT.UPDATE_LIFE, -1);
+				if (current <= 0) {
                     GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, false);
                 } else {
 					levelController.ResetPlayerPosition();

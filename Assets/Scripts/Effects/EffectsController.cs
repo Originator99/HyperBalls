@@ -42,6 +42,13 @@ public class EffectsController : MonoBehaviour {
         CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 0.1f);
     }
 
+	public int GetCurrentLevel() {
+		if (levelController != null && levelController.levelData != null && levelController.levelData.levelData != null) {
+			return levelController.levelData.levelData.id;
+		}
+		return 1;
+	}
+
 	public void UseSkill(int id, Transform player) {
 		switch (id) {
 			case 1:
@@ -113,10 +120,10 @@ public class EffectsController : MonoBehaviour {
 		ISkill controller = go.GetComponent<ISkill>();
 		if (controller != null) {
 			controller.UseSkill(startPosition);
-			//InventoryHelper.UpdateSkills(skillID, -1);
-			//if (LevelUIManager.instance != null) {
-			//	LevelUIManager.instance.RefreshSkills(skillID);
-			//}
+			InventoryHelper.UpdateSkills(skillID, -1);
+			if (LevelUIManager.instance != null) {
+				LevelUIManager.instance.RefreshSkills(skillID);
+			}
 		} else {
 			Debug.LogError("ISkill interface not implemented for : " + go.name);
 		}

@@ -19,21 +19,29 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: ed752091fb9710d44ac90905ef30fd52, type: 3}
     SkillType: 1
     Cost: 0
+    UnlocksAtLevel: 0
+    CanOnlyUseOnce: 0
   - Id: 2
     Name: Good Missile
     Desc: Blows up the nearest Green Block
     Icon: {fileID: 21300000, guid: afd67ece44334024da420499aaff26da, type: 3}
     SkillType: 1
     Cost: 0
+    UnlocksAtLevel: 0
+    CanOnlyUseOnce: 0
   - Id: 3
     Name: Bombarda
     Desc: Destroys everything that comes into it's path
     Icon: {fileID: 21300000, guid: 98725e74e809780418b20aa067d4d7be, type: 3}
     SkillType: 1
     Cost: 0
+    UnlocksAtLevel: 0
+    CanOnlyUseOnce: 0
   - Id: 4
     Name: Nuclear
     Desc: BOOM!
-    Icon: {fileID: 21300000, guid: f5c29b00aea4c7948bd49b63d7e03e5a, type: 3}
+    Icon: {fileID: 21300000, guid: 6cb93c7b1a377b24fb9d8fbaf86ab22b, type: 3}
     SkillType: 1
     Cost: 0
+    UnlocksAtLevel: 0
+    CanOnlyUseOnce: 1
