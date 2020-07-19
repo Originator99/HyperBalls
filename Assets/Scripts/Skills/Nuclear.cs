@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Nuclear : MonoBehaviour, ISkill {
 	public GameObject bomb, skull, ripple; 
 	public ParticleSystem explosion;
+	public AudioSource explosionSound;
 
 	private Vector3 rippleOriginalScale, skullOriginalScale;
 
@@ -32,6 +33,7 @@ public class Nuclear : MonoBehaviour, ISkill {
 			bomb.SetActive(false);
 			explosion.gameObject.SetActive(true);
 			explosion.Play();
+			explosionSound.Play();
 		});
 		yield return new WaitForSeconds(2f);
 

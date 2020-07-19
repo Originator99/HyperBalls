@@ -16,7 +16,7 @@ public class Bombarda : MonoBehaviour, ISkill {
 		transform.DOMoveY(start_position.y + 2f, 1f);
 		yield return new WaitForSeconds(1f);
 		trailTrail.SetActive(true);
-		transform.DOMoveX(transform.position.x + 50f, 4f);
+		transform.DOMoveX(transform.position.x + 35f, 3.5f);
 		headTrail.SetActive(true);
 	}
 
