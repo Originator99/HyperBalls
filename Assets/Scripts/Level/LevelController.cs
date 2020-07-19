@@ -8,8 +8,8 @@ public class LevelController : MonoBehaviour {
 	public LevelSO levelData;
     public LevelPart[] partsOfLevel;
     public int currentPart;
+    public GameObject playerGO;
 
-    private GameObject playerGO;
     private LevelUpdate levelUpdate;
 
     public void Start() {

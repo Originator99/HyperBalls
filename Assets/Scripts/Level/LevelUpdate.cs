@@ -63,6 +63,7 @@ public class LevelUpdate : MonoBehaviour {
 				if (current <= 0) {
                     GameEventSystem.RaiseGameEvent(GAME_EVENT.LEVEL_END, false);
                 } else {
+					EffectsController.instance?.PlayPlayerHit();
 					levelController.ResetPlayerPosition();
                 }
             }

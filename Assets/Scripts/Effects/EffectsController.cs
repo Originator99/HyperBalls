@@ -16,7 +16,14 @@ public class EffectsController : MonoBehaviour {
 	public GameObject bombardaPrefab;
 	public GameObject NuclearPrefab;
 
+	[Header("Universal Sounds")]
+	public AudioClip playerDead_AC;
+	public AudioClip playerHit_AC;
+	public AudioClip playerDash_AC;
+	public AudioClip timeSlowDown_AC;
+
 	private LevelController levelController;
+	private AudioSource audioSource;
 
     #region Singleton
     public static EffectsController instance;
@@ -36,6 +43,9 @@ public class EffectsController : MonoBehaviour {
 		if (levelController == null) {
 			Debug.LogError("Level Controller is null in effects controller");
 		}
+		if (audioSource == null) {
+			audioSource = GetComponent<AudioSource>();
+		}
 	}
 
 	public void CameraShake(float power = 0.5f) {
@@ -48,6 +58,8 @@ public class EffectsController : MonoBehaviour {
 		}
 		return 1;
 	}
+
+	#region Skills
 
 	public void UseSkill(int id, Transform player) {
 		switch (id) {
@@ -128,4 +140,34 @@ public class EffectsController : MonoBehaviour {
 			Debug.LogError("ISkill interface not implemented for : " + go.name);
 		}
 	}
+
+	#endregion
+
+	#region Audio Related
+	public void PlayPlayerDead() {
+		PlayAudio(playerDead_AC);
+	}
+	public void PlayPlayerHit() {
+		PlayAudio(playerHit_AC);
+	}
+	public void PlayPlayerDash() {
+		PlayAudio(playerDash_AC, 1f);
+	}
+	public void PlayTimeSlowDown() {
+		PlayAudio(timeSlowDown_AC, 1f);
+	}
+
+	private void PlayAudio(AudioClip clip, float volume = 0.8f) {
+		if (audioSource.isPlaying) {
+			audioSource.Stop();
+		}
+		if (audioSource != null && clip != null) {
+			audioSource.clip = clip;
+			audioSource.volume = volume;
+			audioSource.Play();
+		} else {
+			Debug.LogWarning("Audio Source or Audio Clip is missing");
+		}
+	}
+	#endregion
 }

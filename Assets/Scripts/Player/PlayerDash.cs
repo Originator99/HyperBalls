@@ -46,5 +46,6 @@ public class PlayerDash : MonoBehaviour {
         rb.gravityScale = 0;
         this.target = target;
         isMoving = true;
+		EffectsController.instance?.PlayPlayerDash();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class LivesPanel : MonoBehaviour {
 	public GameObject heartPrefab;
@@ -85,9 +86,11 @@ public class LivesPanel : MonoBehaviour {
 		if (currentLives < 0) {
 			currentLives = 0;
 		}
-		if (currentLives < livesPanel.childCount) {
+		if (currentLives < livesPanel.childCount && gameObject.activeSelf) {
 			Transform child = livesPanel.GetChild(currentLives);
-			child.GetComponent<Image>().color = Helper.HexToColor(heartUnfilledColor);
+			Color unfill = Helper.HexToColor(heartUnfilledColor);
+			child.GetComponent<Image>().DOColor(unfill, 1f);
+			child.DOShakePosition(1f, 2f);
 		}
 	}
 }

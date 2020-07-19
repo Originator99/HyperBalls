@@ -7,6 +7,9 @@ public class PlayerMotor : MonoBehaviour {
 	public SimpleTouchController movementArea;
 	public float MoveSpeed = 7f;
 
+	[Header("Sounds")]
+	public AudioSource jumpSoundFx;
+
 	private readonly float JumpForceDefault = 4f;
 	private bool isGrounded;
 	private Rigidbody2D rb;
@@ -35,6 +38,9 @@ public class PlayerMotor : MonoBehaviour {
 	private void DoJump(float jumpForce) {
 		rb.velocity = new Vector2(Mathf.Sqrt(2f * Physics2D.gravity.magnitude * jumpForce), rb.velocity.y);
 		isGrounded = false;
+		if (jumpSoundFx != null) {
+			jumpSoundFx.Play();
+		}
 	}
 
 	private void HandleMovement() {

@@ -7,15 +7,20 @@ public class GameManager : MonoBehaviour {
     public float slowdownLength = 2f;
     private bool stopSlowDown;
 
+	[Header("Sounds")]
+	private AudioSource background;
+
     #region Singleton
 
     public static GameManager instance;
     private void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+		if (instance == null) {
+			instance = this;
+			DontDestroyOnLoad(gameObject);
 			LevelHelper.Init();
 			InventoryHelper.Init();
+		} else if (instance != null) {
+			Destroy(gameObject);
 		}
 	}
 
@@ -23,7 +28,15 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         GameEventSystem.OnGameEventRaised += HandleGameEvents;
-    }
+
+
+		background = GetComponent<AudioSource>();
+		if (background != null && !background.isPlaying) {
+			background.Play();
+		} else {
+			Debug.LogError("Cannot play background music : Audio Source is null in " + gameObject.name);
+		}
+	}
 
 	private void Update() {
         HandleSlowMotion();
@@ -46,6 +59,8 @@ public class GameManager : MonoBehaviour {
         }
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+		EffectsController.instance?.PlayTimeSlowDown();
     }
     public void StopSlowMotion() {
         stopSlowDown = true;

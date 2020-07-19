@@ -793,6 +793,7 @@ MonoBehaviour:
   - {fileID: 945390962}
   - {fileID: 2051488834}
   currentPart: 0
+  playerGO: {fileID: 0}
 --- !u!114 &635532006
 MonoBehaviour:
   m_ObjectHideFlags: 0
