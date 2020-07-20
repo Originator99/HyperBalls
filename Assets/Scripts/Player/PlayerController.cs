@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.GetComponent<Obstacle>() != null) {
-			LevelObjectType type = LevelObjectType.NONE;
-			collision.gameObject.GetComponent<Obstacle>().OnPlayerHit(out type);
-		}
+		//if (collision.gameObject.GetComponent<Obstacle>() != null) {
+		//	LevelObjectType type = LevelObjectType.NONE;
+		//	collision.gameObject.GetComponent<Obstacle>().OnPlayerHit(out type);
+		//}
 	}
 
 	private void OnGamePaused() {

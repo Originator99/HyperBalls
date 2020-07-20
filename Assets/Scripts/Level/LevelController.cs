@@ -156,6 +156,7 @@ public class LevelController : MonoBehaviour {
 				LevelHelper.SaveLevelData();
 				InventoryHelper.UpdateMoney(money_earned);
 				InventoryHelper.SavePlayerData();
+				PlayerPrefs.SetInt("last_level_id", levelData.levelData.id);
 			} else {
 				Debug.LogError("Cannot update level, levelData is null");
 			}

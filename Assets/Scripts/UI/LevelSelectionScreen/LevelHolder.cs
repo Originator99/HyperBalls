@@ -8,6 +8,7 @@ public class LevelHolder : MonoBehaviour {
 	public Transform starsPanel;
 	public Image difficultyPanelImage;
 	public Transform completedPanel;
+	public Transform lockedPanel;
 	public Button button;
 
 	public void RenderLevelBox(LevelData data) {
@@ -32,6 +33,11 @@ public class LevelHolder : MonoBehaviour {
 			completedPanel.gameObject.SetActive(true);
 		} else {
 			completedPanel.gameObject.SetActive(false);
+		}
+		if ((PlayerPrefs.GetInt("last_level_id", 0) + 1) < data.id) {
+			lockedPanel.gameObject.SetActive(true);
+		} else {
+			lockedPanel.gameObject.SetActive(false);
 		}
 
 		button.onClick.RemoveAllListeners();

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63a591dca70f0014c817d5b06ee779c6, type: 3}
-  m_Name: LEVEL_1
+  m_Name: LEVEL_4
   m_EditorClassIdentifier: 
   levelData:
-    id: 1
-    sceneName: 3
+    id: 4
+    sceneName: 6
     completed: 0
     moneyEarned: 0
     difficulty: 1
