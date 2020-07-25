@@ -18,7 +18,7 @@ public class LevelSelection : MonoBehaviour {
 		});
 	}
 
-	public void ShowLevelSelection(ref List<LevelData> data) {
+	public void ShowLevelSelection(List<LevelData> data) {
 		if (data != null) {
 			int new_panels = data.Count - levelContent.childCount;
 			for (int i = 0; i < new_panels; i++) {

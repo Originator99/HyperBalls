@@ -21,7 +21,7 @@ public class DashboardUIManager : MonoBehaviour {
         PlayButton.onClick.RemoveAllListeners();
         PlayButton.onClick.AddListener(delegate() {
 			if (LevelSelectionController != null) {
-				LevelSelectionController.ShowLevelSelection(ref LevelHelper.LEVELS);
+				LevelSelectionController.ShowLevelSelection(LevelHelper.LEVELS);
 			} else {
 				Debug.LogError("Level Selection controller is null. Missing a reference?");
 			}

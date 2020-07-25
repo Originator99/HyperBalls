@@ -13,9 +13,11 @@ public static class LevelHelper {
 	public static void Init() {
 		Debug.Log("Path  : " + saveFilePath);
 		LevelCollection collection = LoadLevelData();
-		if (collection != null) {
+		if (collection != null && collection.levels !=null) {
 			LEVELS = new List<LevelData>();
-			LEVELS = collection.levels;
+			foreach (var temp in collection.levels) {
+				LEVELS.Add(temp);
+			}
 		} else {
 			Debug.LogError("Level Collection type is not attached to resource fetched");
 		}
