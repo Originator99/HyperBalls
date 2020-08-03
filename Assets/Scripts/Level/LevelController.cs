@@ -5,12 +5,15 @@ using DG.Tweening;
 
 public class LevelController : MonoBehaviour {
     public GameObject Room;
-	public LevelSO levelData;
-    public LevelPart[] partsOfLevel;
+	public LocalLevelData localLevelData;
+	public LevelPart[] partsOfLevel;
     public int currentPart;
     public GameObject playerGO;
 
-    private LevelUpdate levelUpdate;
+	[SerializeField]
+	private LevelSO levelDataSO;
+
+	private LevelUpdate levelUpdate;
 
     public void Start() {
         currentPart = 0;
@@ -25,13 +28,10 @@ public class LevelController : MonoBehaviour {
         if (levelUpdate == null) {
             Debug.LogError("Level update is null. Is it attached in the same GO as Level Controller?");
         }
-		if (levelData == null) {
-			Debug.LogError("Level Data is null");
+		if (levelDataSO == null) {
+			Debug.LogError("Level Data SO is null");
 		} else {
-			var temp = LevelHelper.GetLevelData(levelData.levelData.id);
-			if (temp != null) {
-				levelData.levelData = temp;
-			}
+			localLevelData = LevelHelper.GetLocalLevelData(levelDataSO.levelData.id);
 		}
 
 		Invoke("StartLevel", 1f);
@@ -150,13 +150,13 @@ public class LevelController : MonoBehaviour {
 		int money_earned = 0;
 		if (has_won) {
 			Debug.Log("WON !");
-			if (levelData != null) {
-				money_earned = ScoreManager.GetTotalMoney(levelData.levelData.completed);
-				LevelHelper.UpdateLevel(levelData.levelData.id, true, money_earned);
+			if (localLevelData != null) {
+				money_earned = ScoreManager.GetTotalMoney(localLevelData.completed);
+				LevelHelper.UpdateLevel(localLevelData.id, true, money_earned);
 				LevelHelper.SaveLevelData();
 				InventoryHelper.UpdateMoney(money_earned);
 				InventoryHelper.SavePlayerData();
-				PlayerPrefs.SetInt("last_level_id", levelData.levelData.id);
+				PlayerPrefs.SetInt("last_level_id", localLevelData.id);
 			} else {
 				Debug.LogError("Cannot update level, levelData is null");
 			}

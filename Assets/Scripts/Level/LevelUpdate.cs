@@ -33,7 +33,7 @@ public class LevelUpdate : MonoBehaviour {
 
     public void ResetLevel() {
 		ScoreManager.InitScoreManager();
-		GameEventSystem.RaiseGameEvent(GAME_EVENT.UPDATE_LIFE, levelController.levelData.levelData.maxLives);
+		GameEventSystem.RaiseGameEvent(GAME_EVENT.UPDATE_LIFE, levelController.localLevelData.maxLives);
 	}
 
     /// <summary>

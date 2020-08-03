@@ -53,8 +53,8 @@ public class EffectsController : MonoBehaviour {
     }
 
 	public int GetCurrentLevel() {
-		if (levelController != null && levelController.levelData != null && levelController.levelData.levelData != null) {
-			return levelController.levelData.levelData.id;
+		if (levelController != null && levelController.localLevelData != null) {
+			return levelController.localLevelData.id;
 		}
 		return 1;
 	}

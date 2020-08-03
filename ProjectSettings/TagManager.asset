@@ -9,6 +9,7 @@ TagManager:
   - Bad
   - PostProcessing
   - LevelController
+  - GlobalDataHolder
   layers:
   - Default
   - TransparentFX

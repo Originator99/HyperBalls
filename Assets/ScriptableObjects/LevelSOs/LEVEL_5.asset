@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a591dca70f0014c817d5b06ee779c6, type: 3}
+  m_Name: LEVEL_5
+  m_EditorClassIdentifier: 
+  levelData:
+    id: 5
+    sceneName: 6
+    difficulty: 1
+    maxLives: 2

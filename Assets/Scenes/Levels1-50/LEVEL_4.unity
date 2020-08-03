@@ -603,12 +603,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Room: {fileID: 1818485316}
-  levelData: {fileID: 11400000, guid: d031cb004dc4c85418b32bd3b6cbf31a, type: 2}
+  localLevelData:
+    id: 0
+    completed: 0
+    moneyEarned: 0
+    sceneName: 0
+    difficulty: 0
+    maxLives: 0
   partsOfLevel:
   - {fileID: 2051488834}
   - {fileID: 133780583}
   currentPart: 0
   playerGO: {fileID: 0}
+  levelDataSO: {fileID: 11400000, guid: d031cb004dc4c85418b32bd3b6cbf31a, type: 2}
 --- !u!114 &635532006
 MonoBehaviour:
   m_ObjectHideFlags: 0

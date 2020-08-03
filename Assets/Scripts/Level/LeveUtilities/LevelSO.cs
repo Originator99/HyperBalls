@@ -7,12 +7,14 @@ public class LevelSO : ScriptableObject {
 	public LevelData levelData;
 }
 
+
+/// <summary>
+/// Make sure to add every new vairable which is added here to LevelHelper>UpdateLevelVariables method's For loop
+/// </summary>
 [System.Serializable]
 public class LevelData {
 	public int id;
 	public SceneName sceneName;
-	public bool completed;
-	public int moneyEarned;
 	public int difficulty;
 	public int maxLives;
 }

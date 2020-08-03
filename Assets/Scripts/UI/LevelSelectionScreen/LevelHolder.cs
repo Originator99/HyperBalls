@@ -11,7 +11,7 @@ public class LevelHolder : MonoBehaviour {
 	public Transform lockedPanel;
 	public Button button;
 
-	public void RenderLevelBox(LevelData data) {
+	public void RenderLevelBox(LocalLevelData data) {
 		gameObject.SetActive(true);
 		difficulty.text = GetDifficulty(data.difficulty);
 		difficultyPanelImage.color = GetDifficultyColor(data.difficulty);

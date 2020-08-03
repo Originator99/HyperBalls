@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad(gameObject);
-			LevelHelper.Init();
 			InventoryHelper.Init();
 		} else if (instance != null) {
 			Destroy(gameObject);

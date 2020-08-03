@@ -6,28 +6,60 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 
 public static class LevelHelper {
-	public static List<LevelData> LEVELS;
+	public static List<LocalLevelData> LEVELS;
 
 	private static readonly string saveFilePath = Application.persistentDataPath + "/level.hyperballs";
 
-	public static void Init() {
-		Debug.Log("Path  : " + saveFilePath);
-		LevelCollection collection = LoadLevelData();
-		if (collection != null && collection.levels !=null) {
-			LEVELS = new List<LevelData>();
-			foreach (var temp in collection.levels) {
-				LEVELS.Add(temp);
+	private static bool Initialized;
+
+	public static void Init(LevelCollectionSO collection) {
+		if (!Initialized) {
+			Debug.Log("Levels local Path  : " + saveFilePath);
+			LevelCollection data = LoadLevelData();
+			if (data != null && data.localLevelData != null) {
+				LEVELS = new List<LocalLevelData>();
+				LEVELS = data.localLevelData;
+				Debug.Log("Level Data fetched, updating variables..");
+				UpdateLevelVariables(collection);
+
+				Initialized = true;
+			} else {
+				Debug.LogError("Level Collection type is not attached to resource fetched");
 			}
-		} else {
-			Debug.LogError("Level Collection type is not attached to resource fetched");
 		}
 	}
+
+	public static void UpdateLevelVariables(LevelCollectionSO collection) {
+		if (collection != null && collection.levels != null) {
+			int total_levels = collection.levels.Count;
+			for (int i = 0; i < total_levels ; i++) {
+				LevelData levelData = collection.levels[i].levelData;
+				int index = LEVELS.FindIndex(x => x.id == levelData.id);
+				LocalLevelData data = null;
+				if (index < 0) {
+					data = new LocalLevelData();
+					LEVELS.Add(data);
+				} else {
+					data = LEVELS[index];
+				}
+
+				data.id = levelData.id;
+				data.sceneName = levelData.sceneName;
+				data.maxLives = levelData.maxLives;
+				data.difficulty = levelData.difficulty;
+			}
+			Debug.Log("Level Data Variable Updated");
+		} else {
+			Debug.LogError("Level collection SO is null");
+		}
+	}
+
 	public static void SaveLevelData() {
 		try {
 			if (LEVELS != null && LEVELS.Count > 0) {
 				FileStream stream = new FileStream(saveFilePath, FileMode.Create);
 				LevelCollection data = new LevelCollection();
-				data.levels = LEVELS;
+				data.localLevelData = LEVELS;
 				BinaryFormatter formatter = new BinaryFormatter();
 				formatter.Serialize(stream, data);
 				stream.Close();
@@ -51,16 +83,6 @@ public static class LevelHelper {
 		}
 	}
 
-	public static LevelData GetLevelData(int id) {
-		if (LEVELS != null) {
-			int index = LEVELS.FindIndex(x => x.id == id);
-			if (index != -1) {
-				return LEVELS[index];
-			}
-		}
-		return null;
-	}
-
 	private static LevelCollection LoadLevelData() {
 		if (File.Exists(saveFilePath)) {
 			BinaryFormatter formatter = new BinaryFormatter();
@@ -69,23 +91,20 @@ public static class LevelHelper {
 			stream.Close();
 			return data;
 		} else {
-			Debug.Log("New user, fetching the default Level data..");
-			return FetchLevelDataLocally();
+			Debug.Log("New user, returning default data");
+			LevelCollection data = new LevelCollection {
+				localLevelData = new List<LocalLevelData>()
+			};
+			return data;
 		}
 	}
 
-	private static LevelCollection FetchLevelDataLocally() {
-		var resource = Resources.Load<LevelCollectionSO>("LevelResources/LevelCollection1");
-		if (resource != null && resource.levels!=null) {
-			LevelCollection collection = new LevelCollection();
-			collection.levels = new List<LevelData>();
-			foreach (var temp in resource.levels) {
-				collection.levels.Add(temp.levelData);
-			}
-			return collection;
-		} else {
-			Debug.LogError("Could not find level collection asset in resources folder");
+	public static LocalLevelData GetLocalLevelData(int id) {
+		int index = LEVELS.FindIndex(x => x.id == id);
+		if (index >= 0) {
+			return LEVELS[index];
 		}
+		Debug.LogError("Local Data not found for level with ID : " + id);
 		return null;
 	}
 
