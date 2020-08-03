@@ -12,7 +12,7 @@ public class ComboUI : MonoBehaviour {
 	public TextMeshProUGUI comboAmount, comboLabel;
 	public TMP_ColorGradient combo2xGradient, combo3xGradient, combo4xGradient, combo5xGradient;
 
-	private readonly float maxComboTime = 4f;
+	private readonly float maxComboTime = 3.5f;
 
 	private float currentComboTime;
 	private int currentCombo;
@@ -116,13 +116,13 @@ public class ComboUI : MonoBehaviour {
 	}
 
 	private void DoX2Combo() {
-		comboLabel.GetComponent<RectTransform>().DOShakePosition(maxComboTime, 5, 30, 90, false, false);
+		comboLabel.GetComponent<RectTransform>().DOShakePosition(maxComboTime, 5);
 		comboLabel.colorGradientPreset = combo2xGradient;
 		comboAmount.colorGradientPreset = combo2xGradient;
 		comboAmount.text = "x2";
 	}
 	private void DoX3Combo() {
-		comboLabel.GetComponent<RectTransform>().DOShakePosition(maxComboTime, 8, 30, 90, false, false);
+		comboLabel.GetComponent<RectTransform>().DOShakePosition(maxComboTime, 8);
 		comboLabel.colorGradientPreset = combo3xGradient;
 		comboAmount.colorGradientPreset = combo3xGradient;
 		comboAmount.text = "x3";
